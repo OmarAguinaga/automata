@@ -17,6 +17,7 @@ var inicial =[];
 var inicialnumber = new Object();
 var final = [];
 var tabla = [];
+var startButton = '<button type="button" class="btn btn-warning" onclick="showFunctiontable()" id="buttonStart"> Ready <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> </button> ';
 
 
 
@@ -48,12 +49,19 @@ function addEstadoInicial() {
 }
 
 function addEstadoFinal() {
-    final.push(document.getElementById("finalEntrada").value);
-    document.getElementById("estadoFinal").innerHTML = final;
-    document.getElementById("finalEntrada").value = "";
-    document.getElementById("inicialEntrada").disabled=true;
-    document.getElementById("boton4").disabled=true;
+    if(document.getElementById("finalEntrada").value != ''){
+        final.push(document.getElementById("finalEntrada").value);
+        document.getElementById("estadoFinal").innerHTML = final;
+        document.getElementById("finalEntrada").value = "";
+        document.getElementById('startButton').innerHTML=startButton;
+    }else{
+        return;
+    }
+    
+}
 
+function showFunctiontable(){
+    
     var limitei;
     var limitej;
 
@@ -69,8 +77,8 @@ function addEstadoFinal() {
     var data = '';
     for (var i=0; i<limitei; i++){
         for(var j=0; j<limitej; j++){
-        var tablanumber=1;
-        document.getElementById("caption1").innerHTML = "Inserta la Funcion de Transicion:";
+            var tablanumber=1;
+            document.getElementById("caption1").innerHTML = "Inserta la Funcion de Transicion:";
 
             if(limitei==alfabeto.length){
                 data+='<div class="col-md-4"><p> f(' + estados[j] +","+alfabeto[i]  +') = </p> <input type="text" id="function'+i+j+'"></div>' ;
@@ -82,7 +90,7 @@ function addEstadoFinal() {
 
         }
     }
-    data+='<div class="col-md-12"><br><hr><button  type="button" class="btn btn-primary" onclick="generateGraphic()" id="boton5"> Confirmar Funciones </button></div>';
+    data+='<div class="col-md-12"><br><hr><button  type="button" class="btn btn-warning" onclick="generateGraphic()" id="boton5"> Confirmar Funciones </button></div>';
     document.getElementById("tablas").innerHTML=data;
 }
 
@@ -100,7 +108,7 @@ function generateGraphic() {
         limitej = estados.length;
     }
 
-    var graph = 'graph LR\n';
+    var graph = 'graph LR\n S((Start))-->'+inicial+'(('+inicial+')) \n';
     var tabPos = 0;
     var from = '';
     var to = '';
@@ -109,8 +117,8 @@ function generateGraphic() {
 
     for (var i=0; i<limitei; i++){
         for(var j=0; j<limitej; j++){
-        var tablanumber=1;
-        document.getElementById("caption1").innerHTML = "Inserta la Función de Transicion:";
+            var tablanumber=1;
+            document.getElementById("caption1").innerHTML = "Inserta la Función de Transicion:";
 
             if(limitei==alfabeto.length){
                 tabla[tabPos]+=document.getElementById("function"+i+j).value;
