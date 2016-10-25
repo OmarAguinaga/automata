@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Automata no determinista | AFN </title>
+        
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <script src="js/mermaid.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse">
+            <ul class="nav navbar-nav">
+                <a class="navbar-brand" href="index.html">Home</a>
+                <li class="active"><a href="afd.html">AFD <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="afn.html">AFN <span class="sr-only">(current)</span></a></li>
+            </ul>
+        </nav>
+        
+        <div class="container">
+             <h2>Automata finito no determinista | AFN</h2>
+            <div class="col-md-4">
+               
+                <div >
+                    <h5>Inserta tu alfabeto de entrada:</h5>
+                    <input type="text" id="alfaEntrada"> 
+                    <button type="button" class="btn btn-warning" onclick="addAlfabeto()">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button> 
+                    <p id="alfabeto"></p> 
+                </div>
+
+                <div >
+                    <h5>Inserta tu Conjunto de Estados:</h5>
+                    <input type="text" id="estadosEntrada"> 
+                    <button type="button" class="btn btn-warning" onclick="addEstados()"> 
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button> 
+                    <p id="estados"></p>
+                </div> 
+
+                <div >
+                    <h5>Inserta tu Estado Inicial:</h5>
+                    <input type="text" id="inicialEntrada"> 
+                    <button type="button" class="btn btn-warning" onclick="addEstadoInicial()" id="boton3"> 
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button> 
+                    <p id="estadoInicial"></p> 
+                </div> 
+
+                <div >
+                    <h5>Inserta tu Estado Final:</h5>
+                    <input type="text" id="finalEntrada"> 
+                    <button type="button" class="btn btn-warning" onclick="addEstadoFinal()" id="boton4"> 
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button> 
+                    <p id="estadoFinal"></p> 
+                </div> 
+            </div>
+            
+        </div>
+        
+        <!-- Load scrips -->
+        <script src="js/afn.js"></script>
+    </body>
+
+</html>
