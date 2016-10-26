@@ -27,35 +27,47 @@ document.getElementById("estados").innerHTML = estados;
 
 
 function addAlfabeto() {
-    alfabeto.push(document.getElementById("alfaEntrada").value);
-    document.getElementById("alfabeto").innerHTML = alfabeto;
-    document.getElementById("alfaEntrada").value = "";
-    document.getElementById("alfaEntrada").focus();
+    if(document.getElementById("alfaEntrada").value == '' || document.getElementById("alfaEntrada").value.length > 1){
+        alert('No acepta elementos vacios o mayores a un caracter');
+    }else{
+        alfabeto.push(document.getElementById("alfaEntrada").value);
+        document.getElementById("alfabeto").innerHTML = alfabeto;
+        document.getElementById("alfaEntrada").value = "";
+        document.getElementById("alfaEntrada").focus();
+    }
 }
 
 function addEstados() {
-    estados.push(document.getElementById("estadosEntrada").value);
-    document.getElementById("estados").innerHTML = estados;
-    document.getElementById("estadosEntrada").value = "";
-    document.getElementById("estadosEntrada").focus();
+    if(document.getElementById("estadosEntrada").value == '' || document.getElementById("estadosEntrada").value.length > 1){
+        alert('No acepta elementos vacios o mayores a un caracter');
+    }else{
+        estados.push(document.getElementById("estadosEntrada").value);
+        document.getElementById("estados").innerHTML = estados;
+        document.getElementById("estadosEntrada").value = "";
+        document.getElementById("estadosEntrada").focus();
+    }
 }
 
 function addEstadoInicial() {
-    inicial = document.getElementById("inicialEntrada").value;
-    document.getElementById("estadoInicial").innerHTML = inicial;
-    document.getElementById("inicialEntrada").value = "";
-    document.getElementById("inicialEntrada").disabled=true;
-    document.getElementById("boton3").disabled=true;
+    if(document.getElementById("inicialEntrada").value == '' || document.getElementById("inicialEntrada").value.length > 1){
+        alert('No acepta elementos vacios o mayores a un caracter');
+    }else{
+        inicial = document.getElementById("inicialEntrada").value;
+        document.getElementById("estadoInicial").innerHTML = inicial;
+        document.getElementById("inicialEntrada").value = "";
+        document.getElementById("inicialEntrada").disabled=true;
+        document.getElementById("boton3").disabled=true;
+    }
 }
 
 function addEstadoFinal() {
-    if(document.getElementById("finalEntrada").value != ''){
+    if(document.getElementById("finalEntrada").value == '' || document.getElementById("finalEntrada").value.length > 1){
+        alert('No acepta elementos vacios o mayores a un caracter');
+    }else{
         final.push(document.getElementById("finalEntrada").value);
         document.getElementById("estadoFinal").innerHTML = final;
         document.getElementById("finalEntrada").value = "";
         document.getElementById('startButton').innerHTML=startButton;
-    }else{
-        return;
     }
     
 }
@@ -78,7 +90,7 @@ function showFunctiontable(){
     for (var i=0; i<limitei; i++){
         for(var j=0; j<limitej; j++){
             var tablanumber=1;
-            document.getElementById("caption1").innerHTML = "Inserta la Funcion de Transicion:";
+            document.getElementById("caption1").innerHTML = "Inserta la Funcion de Transicion:<p class = 'funcionCaption'>Si la funcion lleva a multiples estados con una misma entrada, escribelos sin espacio. Ejemplo 'abc'</p>";
 
             if(limitei==alfabeto.length){
                 data+='<div class="col-md-4"><p> f(' + estados[j] +","+alfabeto[i]  +') = </p> <input type="text" id="function'+i+j+'"></div>' ;
@@ -108,35 +120,59 @@ function generateGraphic() {
         limitej = estados.length;
     }
 
-    var graph = 'graph LR\n S((Start))-->'+inicial+'(('+inicial+')) \n';
+    var graph = 'graph LR\n Start((Start))-->'+inicial+'(('+inicial+')) \n';
     var tabPos = 0;
     var from = '';
     var to = '';
     var entry = '';
+    var tablaToSection = '';
 
 
     for (var i=0; i<limitei; i++){
         for(var j=0; j<limitej; j++){
             var tablanumber=1;
             document.getElementById("caption1").innerHTML = "Inserta la Función de Transicion:";
-
-            if(limitei==alfabeto.length){
-                tabla[tabPos]+=document.getElementById("function"+i+j).value;
-                from = tabla[tabPos].charAt(0);
-                entry = tabla[tabPos].charAt(1);
-                to = tabla[tabPos].charAt(2);
-                graph+=from+'(('+from+'))--'+entry+'-->'+to+'(('+to+'))\n';
+            tabla[tabPos]+=document.getElementById("function"+i+j).value;
+            if(tabla[tabPos].length>3){
+                tablaToSection = tabla[tabPos].substr(2,tabla[tabPos].length);
+                for(var w = 0; w<tablaToSection.length; w++){
+                    from = tabla[tabPos].charAt(0);
+                    entry = tabla[tabPos].charAt(1);
+                    to = tablaToSection.charAt(w);
+                    if(to!=''){
+                        graph+=from+'(('+from+'))--'+entry+'-->'+to+'(('+to+'))\n'; 
+                    }     
+                }   
             }else{
-                tabla[tabPos]+=document.getElementById("function"+i+j).value;
                 from = tabla[tabPos].charAt(0);
                 entry = tabla[tabPos].charAt(1);
                 to = tabla[tabPos].charAt(2);
-                graph+=from+'(('+from+'))--'+entry+'-->'+to+'(('+to+'))\n';
+                if(to!=''){
+                    graph+=from+'(('+from+'))--'+entry+'-->'+to+'(('+to+'))\n';
+                }
             }
+            
+//            if(limitei==alfabeto.length){
+//        
+//                from = tabla[tabPos].charAt(0);
+//                entry = tabla[tabPos].charAt(1);
+//                to = tabla[tabPos].charAt(2);
+//                graph+=from+'(('+from+'))--'+entry+'-->'+to+'(('+to+'))\n';
+//            }else{
+//                
+//                from = tabla[tabPos].charAt(0);
+//                entry = tabla[tabPos].charAt(1);
+//                to = tabla[tabPos].charAt(2);
+//                graph+=from+'(('+from+'))--'+entry+'-->'+to+'(('+to+'))\n';
+//            }
             tabPos++;
         }
     }
-
+    
+    for(var i = 0; i < final.length; i++){
+        graph+='style '+final[i]+' stroke-width:6px, stroke:#e74c3c;\n';
+    }
+    
     //Grafica
     var div = document.getElementById('graph');
     var insertSvg = function(svgCode, bindFunctions){
@@ -155,34 +191,38 @@ function validateIfBelongs(){
     var limitei;
     var limitej;
     var cadena = document.getElementById('cadena').value;
-    var success = '<div class="alert alert-success" role="alert"> <a href="#" class="alert-link">Si pertenece</a> </div>';
-    var fail = '<div class="alert alert-danger" role="alert"> <a href="#" class="alert-link">No pertenece</a> </div>';
+    var success = '<div class="alert alert-success" role="alert"> Si pertenece | <a href="afn.html" class="alert-link">Nuevo AFN</a> </div>';
+    var fail = '<div class="alert alert-danger" role="alert">No pertenece | <a href="afn.html" class="alert-link">Nuevo AFN</a> </div>';
     var alertConatiner = document.getElementById('alert');
-
+    
     if(cadena.charAt(0)==inicial){
         //alert('maybe pertenece');
         for(var i = 1; i < cadena.length; i++){
             var rowTabla = [];
+            var options = '';
 
             for(var j = 0; j < tabla.length; j++){
                 if(cadena.charAt(i-1)==tabla[j].charAt(0)){
                     rowTabla.push(tabla[j]);
                 }
-            }
-
+            } 
+            
             for(var w = 0; w < rowTabla.length; w++){
-                if(cadena.charAt(i)==rowTabla[w].charAt(2)){
-                    w++;
-                    //alert('maybe pertece'+w);  
-                }else if(w+1===rowTabla.length && cadena.charAt(i)!=rowTabla[w].charAt(2)){
-                    //alert('no pertenece'); 
-                    return alertConatiner.innerHTML=fail;
-                }
+                options+=(rowTabla[w].substr(2,rowTabla[w].length));
             }
+            //alert('options '+ options +' Char ' +cadena.charAt(i)+' i: '+i);
+            
+            if(options.indexOf(cadena.charAt(i))==-1){
+                //alert('no pertenece');
+                return alertConatiner.innerHTML=fail;
+            }else{
+                //alert('maybe');
+            }
+            
             if(cadena.charAt(i)==final[0] && cadena.length == i+1){
                 //alert('Si pertenece'); 
                 return alertConatiner.innerHTML=success;
-            }   
+            }  
         }
         //alert('NO PERTENECE');
         return alertConatiner.innerHTML=fail;

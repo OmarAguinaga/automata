@@ -26,33 +26,49 @@ document.getElementById("estados").innerHTML = estados;
 
 
 function addAlfabeto() {
-    alfabeto.push(document.getElementById("alfaEntrada").value);
-    document.getElementById("alfabeto").innerHTML = alfabeto;
-    document.getElementById("alfaEntrada").value = "";
-    document.getElementById("alfaEntrada").focus();
+    if(document.getElementById("alfaEntrada").value == '' || document.getElementById("alfaEntrada").value.length > 1){
+        alert('No acepta elementos vacios o mayores a un caracter');
+    }else{
+        alfabeto.push(document.getElementById("alfaEntrada").value);
+        document.getElementById("alfabeto").innerHTML = alfabeto;
+        document.getElementById("alfaEntrada").value = "";
+        document.getElementById("alfaEntrada").focus();
+    }
 }
 
 function addEstados() {
-    estados.push(document.getElementById("estadosEntrada").value);
-    document.getElementById("estados").innerHTML = estados;
-    document.getElementById("estadosEntrada").value = "";
-    document.getElementById("estadosEntrada").focus();
+    if(document.getElementById("estadosEntrada").value == '' || document.getElementById("estadosEntrada").value.length > 1){
+        alert('No acepta elementos vacios o mayores a un caracter');
+    }else{
+        estados.push(document.getElementById("estadosEntrada").value);
+        document.getElementById("estados").innerHTML = estados;
+        document.getElementById("estadosEntrada").value = "";
+        document.getElementById("estadosEntrada").focus();
+    }
 }
 
 function addEstadoInicial() {
-    inicial = document.getElementById("inicialEntrada").value;
-    document.getElementById("estadoInicial").innerHTML = inicial;
-    document.getElementById("inicialEntrada").value = "";
-    document.getElementById("inicialEntrada").disabled=true;
-    document.getElementById("boton3").disabled=true;
+    if(document.getElementById("inicialEntrada").value == '' || document.getElementById("inicialEntrada").value.length > 1){
+        alert('No acepta elementos vacios o mayores a un caracter');
+    }else{
+        inicial = document.getElementById("inicialEntrada").value;
+        document.getElementById("estadoInicial").innerHTML = inicial;
+        document.getElementById("inicialEntrada").value = "";
+        document.getElementById("inicialEntrada").disabled=true;
+        document.getElementById("boton3").disabled=true;
+    }
 }
 
 function addEstadoFinal() {
-    final.push(document.getElementById("finalEntrada").value);
-    document.getElementById("estadoFinal").innerHTML = final;
-    document.getElementById("finalEntrada").value = "";
-    document.getElementById("inicialEntrada").disabled=true;
-    document.getElementById("boton4").disabled=true;
+    if(document.getElementById("finalEntrada").value == '' || document.getElementById("finalEntrada").value.length > 1){
+        alert('No acepta elementos vacios o mayores a un caracter');
+    }else{
+        final.push(document.getElementById("finalEntrada").value);
+        document.getElementById("estadoFinal").innerHTML = final;
+        document.getElementById("finalEntrada").value = "";
+        document.getElementById("inicialEntrada").disabled=true;
+        document.getElementById("boton4").disabled=true;
+    }
 
     var limitei;
     var limitej;
@@ -70,7 +86,7 @@ function addEstadoFinal() {
     for (var i=0; i<limitei; i++){
         for(var j=0; j<limitej; j++){
         var tablanumber=1;
-        document.getElementById("caption1").innerHTML = "Inserta la Funcion de Transicion:";
+            document.getElementById("caption1").innerHTML = "Inserta la Funcion de Transicion:";
 
             if(limitei==alfabeto.length){
                 data+='<div class="col-md-4"><p> f(' + estados[j] +","+alfabeto[i]  +') = </p> <input type="text" id="function'+i+j+'"></div>' ;
@@ -100,7 +116,7 @@ function generateGraphic() {
         limitej = estados.length;
     }
 
-    var graph = 'graph LR\n';
+    var graph = 'graph LR\n Start((Start))-->'+inicial+'(('+inicial+')) \n';
     var tabPos = 0;
     var from = '';
     var to = '';
@@ -111,24 +127,26 @@ function generateGraphic() {
         for(var j=0; j<limitej; j++){
         var tablanumber=1;
         document.getElementById("caption1").innerHTML = "Inserta la Función de Transicion:";
+            tabla[tabPos]+=document.getElementById("function"+i+j).value;
+           // if(limitei==alfabeto.length){
+                from = tabla[tabPos].charAt(0);
+                entry = tabla[tabPos].charAt(1);
+                to = tabla[tabPos].charAt(2);
+                if(to!=''){
+                    graph+=from+'(('+from+'))--'+entry+'-->'+to+'(('+to+'))\n'; 
+                }  
 
-            if(limitei==alfabeto.length){
-                tabla[tabPos]+=document.getElementById("function"+i+j).value;
+            /*}else{
                 from = tabla[tabPos].charAt(0);
                 entry = tabla[tabPos].charAt(1);
                 to = tabla[tabPos].charAt(2);
                 graph+=from+'(('+from+'))--'+entry+'-->'+to+'(('+to+'))\n';
-            }else{
-                tabla[tabPos]+=document.getElementById("function"+i+j).value;
-                from = tabla[tabPos].charAt(0);
-                entry = tabla[tabPos].charAt(1);
-                to = tabla[tabPos].charAt(2);
-                graph+=from+'(('+from+'))--'+entry+'-->'+to+'(('+to+'))\n';
-            }
+            }*/
             tabPos++;
         }
     }
-
+    graph+='style '+final+' stroke-width:6px, stroke:#e74c3c;';
+    
     //Grafica
     var div = document.getElementById('graph');
     var insertSvg = function(svgCode, bindFunctions){
@@ -147,8 +165,8 @@ function validateIfBelongs(){
     var limitei;
     var limitej;
     var cadena = document.getElementById('cadena').value;
-    var success = '<div class="alert alert-success" role="alert"> <a href="#" class="alert-link">Si pertenece</a> </div>';
-    var fail = '<div class="alert alert-danger" role="alert"> <a href="#" class="alert-link">No pertenece</a> </div>';
+    var success = '<div class="alert alert-success" role="alert"> Si pertenece | <a href="afd.html" class="alert-link">Nuevo AFD</a> </div>';
+    var fail = '<div class="alert alert-danger" role="alert"> No pertenece | <a href="afd.html" class="alert-link">Nuevo AFD</a> </div>';
     var alertConatiner = document.getElementById('alert');
 
     if(cadena.charAt(0)==inicial){

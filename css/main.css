@@ -1,5 +1,5 @@
 path{
-  stroke: black;
+    stroke: black;
 }
 
 
@@ -11,3 +11,11 @@ foreignObject>div{
    border-radius: 0px;
 } 
 
+circle{
+    fill:white;
+    stroke: #337ab7;
+}
+
+.funcionCaption{
+    font-size: .7em;
+}
