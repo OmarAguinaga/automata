@@ -5,12 +5,13 @@
         <title>Automatas</title>
         
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        
         <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
     <body>
         <nav class="navbar navbar-inverse">
             <ul class="nav navbar-nav">
-                <a class="navbar-brand" href="index.html">Home</a>
+                <a class="navbar-brand" href="index.html">Instrucciones</a>
                 <li class="active"><a href="afd.html">AFD <span class="sr-only">(current)</span></a></li>
                 <li class="active"><a href="afn.html">AFN <span class="sr-only">(current)</span></a></li>
             </ul>
@@ -19,12 +20,203 @@
         <div class="container">
             <div class="jumbotron">
                 <h1>Matematicas Computacionales</h1>
-                <p>...</p>
-                <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+                <h3>Omar Gerardo Aguinaga | A01151981</h3>
+                <p>ITESM</p>
+            </div>
+            
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Instrucciones AFD
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            <h4>El siguiente instructivo utiliza el automata finito determinista con la sigiente gramatica:</h4>
+                            <ul>
+                                <li>Estados: a,b,c</li>
+                                <li>Alfabeto de entrada: 1,0</li>
+                                <li>Estado inicial: a</li>
+                                <li>Estado final: c</li>
+                                <li>funcion de transicion</li>
+                            </ul>
+                            <div class="col-md-4">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Estado</th>
+                                            <th>0</th>
+                                            <th>1</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>a</th>
+                                            <td>a</td>
+                                            <td>b</td>
+                                        </tr>
+                                        <tr>
+                                            <th>b</th>
+                                            <td>c</td>
+                                            <td>a</td>
+                                        </tr>
+                                        <tr>
+                                            <th>c</th>
+                                            <td>b</td>
+                                            <td>c</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-12">
+                                <hr>
+                                <ol>
+                                    <li>
+                                        Introduce los datos uno por uno y hacer click en el boton 
+                                        <button type="button" class="btn btn-primary">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </button> <br>
+                                        Ejemplo: <br>
+                                        <img src="assets/afd1.png">
+                                    </li>
+                                    <li>
+                                        Incerta la funcion de transicion y al ternimar haz click en el boton 
+                                        <button type="button" class="btn btn-primary">
+                                            <span aria-hidden="true">Confirmar Funciones</span>
+                                        </button>  <br>
+                                        Ejemplo: <br>
+                                        <img src="assets/afd2.png">
+                                    </li>
+                                    <li>
+                                        Enseguida el grafo correspondiente al automata aparecera con el estado final representado con un circulo en color rojo. En esta seccion podra insertar cadenas para ver si pertenecen a la gramatica. Para esto incertar la cadena y hacer click en el boton 
+                                        <button type="button" class="btn btn-primary">
+                                            <span aria-hidden="true">Checar</span>
+                                        </button>  <br>
+                                        Ejemplo: <br>
+                                        <img src="assets/afd3.png">
+                                    </li>
+                                    <li>
+                                        Si la funcion pertenece obtendras un mensaje como el siguiente:<br>
+                                        <img src="assets/afd4.png">
+                                    </li>
+                                    <li>
+                                        Si la funcion no pertenece obtendras un mensaje como el siguiente:<br>
+                                        <img src="assets/afd5.png">
+                                    </li>
+                                    <li>
+                                        Si deseas probar un nuevo automata haz click en | Nuevo AFD:<br>
+                                    </li>
+                                </ol>
+                                
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Instrucciones AFN
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            <h4>El siguiente instructivo utiliza el automata finito no determinista con la sigiente gramatica:</h4>
+                            <ul>
+                                <li>Estados: a,b,c</li>
+                                <li>Alfabeto de entrada: 1,0</li>
+                                <li>Estado inicial: a</li>
+                                <li>Estado final: c</li>
+                                <li>funcion de transicion</li>
+                            </ul>
+                            <div class="col-md-4">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Estado</th>
+                                            <th>0</th>
+                                            <th>1</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>a</th>
+                                            <td>a,b</td>
+                                            <td>b</td>
+                                        </tr>
+                                        <tr>
+                                            <th>b</th>
+                                            <td>c</td>
+                                            <td>a,c</td>
+                                        </tr>
+                                        <tr>
+                                            <th>c</th>
+                                            <td>b,c</td>
+                                            <td>c</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-12">
+                                <hr>
+                                <ol>
+                                    <li>
+                                        Introduce los datos uno por uno y hacer click en el boton 
+                                        <button type="button" class="btn btn-warning">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </button> <br>
+                                        - En el estado final es posible agrgar multiples estados, una vez que hayas terminado de agregar los estados finales haz click en el boton 
+                                        <button type="button" class="btn btn-warning">
+                                            Ready
+                                        </button> <br>
+                                        Ejemplo: <br>
+                                        <img src="assets/afn1.png">
+                                    </li>
+                                    <li>
+                                        Incerta la funcion de transicion y al ternimar haz click en el boton (Si la funcion lleva a multiples estados con una misma entrada, escribelos sin espacio.)
+                                        <button type="button" class="btn btn-warning">
+                                            <span aria-hidden="true">Confirmar Funciones</span>
+                                        </button>  <br>
+                                        Ejemplo: <br>
+                                        <img src="assets/afn2.png">
+                                    </li>
+                                    <li>
+                                        Enseguida el grafo correspondiente al automata aparecera y podra insertar cadenas para ver si pertenecen a la gramatica. Para esto incertar la cadena y hacer click en el boton 
+                                        <button type="button" class="btn btn-warning">
+                                            <span aria-hidden="true">Checar</span>
+                                        </button>  <br>
+                                        Ejemplo: <br>
+                                        <img src="assets/afn3.png">
+                                    </li>
+                                    <li>
+                                        Si la funcion pertenece obtendras un mensaje como el siguiente:<br>
+                                        <img src="assets/afn4.png">
+                                    </li>
+                                    <li>
+                                        Si la funcion no pertenece obtendras un mensaje como el siguiente:<br>
+                                        <img src="assets/afn5.png">
+                                    </li>
+                                    <li>
+                                        Si deseas probar un nuevo automata haz click en | Nuevo AFN:<br>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
             
         </div>
-        
+        <script src="js/jquery-3.1.1.min.js"></script>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         
     </body>
 

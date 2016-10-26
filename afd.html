@@ -11,7 +11,7 @@
     <body>
         <nav class="navbar navbar-inverse">
             <ul class="nav navbar-nav">
-                <a class="navbar-brand" href="index.html">Home</a>
+                <a class="navbar-brand" href="index.html">Instrucciones</a>
                 <li class="active"><a href="afd.html">AFD <span class="sr-only">(current)</span></a></li>
                 <li class="active"><a href="afn.html">AFN <span class="sr-only">(current)</span></a></li>
             </ul>
@@ -26,7 +26,8 @@
                     <button type="button" class="btn btn-primary" onclick="addAlfabeto()">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </button> 
-                        <p id="alfabeto"></p> 
+                    <p id="alfabeto"></p>
+                    <div id = 'alfabeto-error'></div>
                 </div>
 
                 <div >
@@ -36,6 +37,7 @@
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </button> 
                     <p id="estados"></p>
+                    <div id = 'estados-error'></div>
                 </div> 
 
                 <div >
@@ -45,6 +47,7 @@
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </button> 
                     <p id="estadoInicial"></p> 
+                    <div id = 'estadoInicial-error'></div>
                 </div> 
 
                 <div >
@@ -54,6 +57,7 @@
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </button> 
                     <p id="estadoFinal"></p> 
+                    <div id = 'estadoFinal-error'></div>
                 </div> 
             </div>
             
@@ -62,6 +66,15 @@
 
                 <div id="tablas"></div> 
             </div>
+            
+            <div class="col-md-12">
+                <hr>
+                <div class="col-md-6">
+                    <h5 id="header"> </h5>
+                    <div id="tablePrint"></div>
+                </div>
+            </div>
+            
             
             <div class="col-md-12">
                 <div class="mermaid" id = "graph"></div>

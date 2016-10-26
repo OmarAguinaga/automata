@@ -18,6 +18,7 @@ var inicialnumber = new Object();
 var final = [];
 var tabla = [];
 var startButton = '<button type="button" class="btn btn-warning" onclick="showFunctiontable()" id="buttonStart"> Ready <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> </button> ';
+var error = "<code>No acepta elementos vacios o mayores a un caracter</code>";
 
 
 
@@ -28,46 +29,51 @@ document.getElementById("estados").innerHTML = estados;
 
 function addAlfabeto() {
     if(document.getElementById("alfaEntrada").value == '' || document.getElementById("alfaEntrada").value.length > 1){
-        alert('No acepta elementos vacios o mayores a un caracter');
+        //alert('No acepta elementos vacios o mayores a un caracter');
+        document.getElementById('alfabeto-error').innerHTML = error;
     }else{
         alfabeto.push(document.getElementById("alfaEntrada").value);
         document.getElementById("alfabeto").innerHTML = alfabeto;
         document.getElementById("alfaEntrada").value = "";
         document.getElementById("alfaEntrada").focus();
+        document.getElementById('alfabeto-error').innerHTML = '';
     }
 }
 
 function addEstados() {
     if(document.getElementById("estadosEntrada").value == '' || document.getElementById("estadosEntrada").value.length > 1){
-        alert('No acepta elementos vacios o mayores a un caracter');
+        document.getElementById('estados-error').innerHTML = error;
     }else{
         estados.push(document.getElementById("estadosEntrada").value);
         document.getElementById("estados").innerHTML = estados;
         document.getElementById("estadosEntrada").value = "";
         document.getElementById("estadosEntrada").focus();
+        document.getElementById('estados-error').innerHTML = '';
     }
 }
 
 function addEstadoInicial() {
     if(document.getElementById("inicialEntrada").value == '' || document.getElementById("inicialEntrada").value.length > 1){
-        alert('No acepta elementos vacios o mayores a un caracter');
+        document.getElementById('estadoInicial-error').innerHTML = error;
     }else{
         inicial = document.getElementById("inicialEntrada").value;
         document.getElementById("estadoInicial").innerHTML = inicial;
         document.getElementById("inicialEntrada").value = "";
         document.getElementById("inicialEntrada").disabled=true;
         document.getElementById("boton3").disabled=true;
+        document.getElementById('estadoInicial-error').innerHTML = '';
     }
 }
 
 function addEstadoFinal() {
     if(document.getElementById("finalEntrada").value == '' || document.getElementById("finalEntrada").value.length > 1){
-        alert('No acepta elementos vacios o mayores a un caracter');
+        document.getElementById('estadoFinal-error').innerHTML = error;
     }else{
         final.push(document.getElementById("finalEntrada").value);
         document.getElementById("estadoFinal").innerHTML = final;
         document.getElementById("finalEntrada").value = "";
         document.getElementById('startButton').innerHTML=startButton;
+        document.getElementById('estadoFinal-error').innerHTML = '';
     }
     
 }
@@ -102,7 +108,7 @@ function showFunctiontable(){
 
         }
     }
-    data+='<div class="col-md-12"><br><hr><button  type="button" class="btn btn-warning" onclick="generateGraphic()" id="boton5"> Confirmar Funciones </button></div>';
+    data+='<div class="col-md-12"><br><hr><button  type="button" class="btn btn-warning" onclick="generateGraphic(); createTable()" id="boton5"> Confirmar Funciones </button></div>';
     document.getElementById("tablas").innerHTML=data;
 }
 
@@ -230,4 +236,44 @@ function validateIfBelongs(){
         //alert('no pertenece');
         return alertConatiner.innerHTML=fail;
     }
+}
+
+function createTable(){
+    var y = 0;
+
+    //Create a HTML Table element.
+
+    document.getElementById("header").innerHTML = "Tabla de Transicion:";
+
+    var table = document.createElement("table");
+    table.className = 'table';
+
+
+    //Get the count of columns.
+    var columnCount = alfabeto.length;
+
+    //Add the header row.
+    var row = table.insertRow(-1);
+    var headerCell = document.createElement("TH");
+    headerCell.innerHTML = "";
+    row.appendChild(headerCell);
+    for (var i = 0; i < columnCount; i++) {
+        var headerCell = document.createElement("TH");
+        headerCell.innerHTML = alfabeto[i];
+        row.appendChild(headerCell);
+    }
+    //Add the rows.
+    for (var i = 0; i < estados.length; i++) {
+        row = table.insertRow(-1);
+        var cell = row.insertCell(-1);
+        cell.innerHTML = estados[i];
+        for (var j = 0; j < columnCount; j++) {
+            var cell = row.insertCell(-1);
+            cell.innerHTML = tabla[y].charAt(2);
+            y++;
+        }
+    }
+    var dvTable = document.getElementById("tablePrint");
+    dvTable.innerHTML = "";
+    dvTable.appendChild(table);
 }
